@@ -7,7 +7,12 @@ import (
 	"github.com/rockneurotiko/gorequest"
 )
 
-const URL = "https://api.bot-metrics.com/v1/messages"
+const (
+	URL                 = "https://api.bot-metrics.com/v1/messages"
+	MessageTypeIncoming = "incoming"
+	MessageTypeOutgoing = "outgoing"
+	PlatformTelegram    = "telegram"
+)
 
 type Answer struct {
 	Status string `json:"status"`
@@ -28,7 +33,7 @@ type Message struct {
 	UserID      string      `json:"user_id"`
 	Platform    string      `json:"platform"`
 	CreatedAt   time.Time   `json:"created_at"`
-	Metadata    interface{} `json:"metadata"`
+	Metadata    interface{} `json:"metadata,omitempty"`
 }
 
 func createRequest(getp sender, payload Envelope) *gorequest.SuperAgent {
